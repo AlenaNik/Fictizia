@@ -1,21 +1,25 @@
 import React from 'react';
 import './App.css';
-import Greetings from './Greetings';
-import ShowName from './ShowName';
-import ShowMessage from './ShowMessage';
-import ConditionalRender from './ConditionalRender';
+import Title from './Title';
+import Text from './Text';
+import List from './List';
+import Link from './Link';
+
+
+
+
+const ShowMessage = props => 
+<p>{props.message}</p>
+
 
 function App() {
-
-  const user = { name: 'Sergio'}
-
   return (
     <div className="App">
-      <Greetings/>
-      <ShowName name={user.name}/>
-      <ShowMessage/>
-      <ConditionalRender/>
-      </div>
+    <Title title='Necesito partir en componentes todo esto'/>
+    <Text text='Para ello puedo usar React que me permitirá poder reutilizar todos esos componentes. Para ello tengo que:'/>
+    <List />
+    <Link link="https://reactjs.org/"/>
+    </div>
     
   );
 }
