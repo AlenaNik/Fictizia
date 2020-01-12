@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
-import Parent from './Parent'
+import './Users';
+import Users from "./Users";
+import Task from "./Task";
 
 
+class App extends Component {
+    state = {
+        show: false
+    }
 
+    toggleComponent = () => {
+        this.setState({show: !this.state.show})
+    }
 
-function App() {
-  return (
-    <div className="App"> 
-      <Parent />
-    </div>
-  );
+    render() {
+        return (
+            <>
+                { this.state.show ? <Users/> : '' }
+            <button onClick={this.toggleComponent}> Toggle
+            </button>
+                <Task/>
+            </>
+        )
+    }
+
 }
 
 export default App;
