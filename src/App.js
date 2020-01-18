@@ -1,54 +1,64 @@
-import React, {Component} from 'react';
-import './App.css';
-import './Users';
-import axios from 'axios';
-
-
+import React, {Component} from 'react'
+import './App.css'
+import List from './List'
 
 class App extends Component {
     state = {
-        show: false,
-        item: [],
-        newInput: null
-    }
+        newInput: '',
+        todos: [
+            { id: 1, 
+              text: 'call mom'
+            },
+            { id: 2, 
+                text: 'feed cat'
+            },
+            { id: 3, 
+            text: 'another'
+            }
+        ]}
 
-    getData = () => {
-        let url = 'https://jsonplaceholder.typicode.com/todos/1'
-        axios.get(url)
-            .then(res => {
-                const item = res.data;
-                this.setState({ item })
-                this.showComponent()
-            })
-            .catch(err => console.log(err, 'its been an error'))
-    }
-
-    showComponent = () => {
-        this.setState({show: !this.state.show})
-    }
-
+    
     handleNameChange = e => {
         this.setState({ newInput: e.target.value.trim()})
+        console.log(this.newInput)
+    }
+
+    addTodo = () => {
+            let todos = [...this.state.todos]
+            todos.push({
+                id: Math.random(),
+                text: this.state.newInput})
+            this.setState({ todos })
+            console.log(todos)
+        }
+
+    deleteTodo = (todoToDelete) => {
+            let todos = this.state.todos.filter(todo => todo.id !== todoToDelete.id) 
+             this.setState({ todos })
+             console.log(todos)
+            
+            // tlter id = !id   
+    }    
+    editTodo = (todoToDelete) => {
+            console.log(todoToDelete)
     }
 
 
     render() {
         return (
             <>
-                { this.state.show ? <h1>{this.state.item.id}</h1> : '' }
-                    <button onClick={this.getData}> Show
-                </button>
                 <div>
                     name: 
                     <input
                     onChange={this.handleNameChange}
                     value={this.newInput}/>
                 </div>
-                <select>
-                    <option value={this.newInput}>{this.state.newInput}</option>
-                </select>
-            
-
+                <button onClick={this.addTodo}>Add to do</button>
+                <List 
+                handledelete={this.deleteTodo}
+                handleedit={this.editTodo}
+                todos={this.state.todos}
+            />
             </>
         )
     }
