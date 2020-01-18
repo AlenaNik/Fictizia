@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import Todos from './Todos'
 import Input from './Input'
@@ -66,7 +67,6 @@ editTodo = (id) => {
            </div>
         )
     }
-
 }
 
 export default App;
