@@ -9,7 +9,6 @@ class App extends Component {
          { id: 1, text: 'I\'m the first' },
          { id: 2, text: 'I\'m the second' },
      ],
-     editing: [],
  }
 
 handleInputChange = (e) => {
