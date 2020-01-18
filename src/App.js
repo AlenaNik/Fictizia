@@ -1,26 +1,72 @@
 import React, {Component} from 'react';
-import './App.css';
-import './Users';
-import Users from "./Users";
-import Task from "./Task";
+
 
 
 class App extends Component {
-    state = {
-        show: false
+ constructor(props) {
+     super(props);
+
+     this.state = {
+         newItem: "",
+         list: [
+         ]
+     }
+ }
+    handleInputChange(key, value) {
+     this.setState({
+         [key]: value
+     })
     }
 
-    toggleComponent = () => {
-        this.setState({show: !this.state.show})
+addItem() {
+     const newItem = {
+         id: 1 + Math.random(),
+         value: this.state.newItem.slice()
+     }
+     const list = [...this.state.list]
+     list.push(newItem)
+    this.setState({
+        list,
+        newItem: ""
+    })
+
+}
+
+    deleteItem(id) {
+     const list = [...this.state.list]
+     const updatedList = list.filter(item => item.id !== id);
+     this.setState({list: updatedList})
     }
+
 
     render() {
         return (
             <>
-                { this.state.show ? <Users/> : '' }
-            <button onClick={this.toggleComponent}> Toggle
-            </button>
-                <Task/>
+                <h1>Add an item</h1>
+                <br />
+                <div>
+                    Add todo
+                    <input
+                    type="text"
+                    placeholder="Type something"
+                    value={this.state.newItem}
+                    onChange={e => this.handleInputChange("newItem", e.target.value)}
+                    />
+                    <button
+                    onClick={() => this.addItem()}
+                    >Add</button>
+                    <ul>
+                       {this.state.list.map(item => {
+                           return (
+                               <li key={item.id}>
+                                   {item.value}
+                                   <button onClick={() => this.deleteItem(item.id)}>Delete item</button>
+                               </li>
+                           )
+                       })}
+                    </ul>
+
+                </div>
             </>
         )
     }
