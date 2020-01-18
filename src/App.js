@@ -32,7 +32,9 @@ handleInputChange = (e) => {
         id: Math.random(),
         text: this.state.newItem
     })
-    this.setState({ todos })
+    this.setState({ todos,
+     newItem: ''
+     })
  }
 
 editTodo = (id) => {
@@ -42,7 +44,7 @@ editTodo = (id) => {
     this.setState({
     newItem: selectedItem.text,
     editItem: true,
-    id: id
+    id: id,
     })
 }
 
