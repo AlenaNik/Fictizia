@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import Todos from './Todos'
 import Input from './Input'
+import Button from './Button'
 
 class App extends Component {
  state = {
@@ -62,7 +63,7 @@ editTodo = (id) => {
                 inputChange={this.handleInputChange}
                 value={this.state.newItem}
             />
-            <button onClick={this.addTodo}> { !this.state.editItem ? 'add item' : 'finish editing'} </button>
+            <Button handleSomething={this.addTodo}> { !this.state.editItem ? 'add item' : 'finish editing'} </Button>
 
            </div>
         )
