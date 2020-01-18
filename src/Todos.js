@@ -1,15 +1,17 @@
 import React from 'react'
+import Button from './Button'
+import ListItem from './ListItem'
 
 const Todos = ({ todos, deleteTodo, editTodo }) => {
 
     const todoList = todos.length ? (
         todos.map(todo => {
             return (
-                <div key={todo.id}>
+                <ListItem key={todo.id}>
                     <span>{todo.text}</span>
-                    <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                    <button onClick={() => editTodo(todo.id)}>Edit</button>
-                </div>
+                    <Button handleSomething={() => deleteTodo(todo.id)}>Delete</Button>
+                    <Button handleSomething={() => editTodo(todo.id)}>Edit</Button>
+                </ListItem>
             )
         })
     ) : (
