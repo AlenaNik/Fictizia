@@ -29,11 +29,11 @@ state = {
     age: '',
     surname: '',
     value: '',
-    isGoing: null,
+    isGoing: true,
 }
 
 handleChange = (e) => {
-    const target = e.value
+    const target = e.target
     const value = target.type === 'checkbox' ? target.checked : target.value
     const name = target.name
     this.setState({
