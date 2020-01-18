@@ -28,7 +28,7 @@ class App extends Component {
     }
 
     handleNameChange = e => {
-        this.setState({ newInput: e.target.value})
+        this.setState({ newInput: e.target.value.trim()})
     }
 
 
@@ -39,11 +39,15 @@ class App extends Component {
                     <button onClick={this.getData}> Show
                 </button>
                 <div>
+                    name: 
                     <input
                     onChange={this.handleNameChange}
                     value={this.newInput}/>
                 </div>
-                <h1>{this.state.newInput}</h1>
+                <select>
+                    <option value={this.newInput}>{this.state.newInput}</option>
+                </select>
+            
 
             </>
         )
