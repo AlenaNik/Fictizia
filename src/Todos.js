@@ -8,7 +8,7 @@ const Todos = ({ todos, deleteTodo, editTodo }) => {
                 <div key={todo.id}>
                     <span>{todo.text}</span>
                     <button onClick={() => deleteTodo(todo.id)}>Delete</button>
-                    <button onChange={() => editTodo(todo.id)}>Edit</button>
+                    <button onClick={() => editTodo(todo.id)}>Edit</button>
                 </div>
             )
         })

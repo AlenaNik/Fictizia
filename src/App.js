@@ -5,6 +5,7 @@ import Todos from './Todos'
 class App extends Component {
  state = {
      newItem: '',
+     editItem: false,
      todos: [
          { id: 1, text: 'I\'m the first' },
          { id: 2, text: 'I\'m the second' },
@@ -13,7 +14,7 @@ class App extends Component {
 
 handleInputChange = (e) => {
     this.setState({
-    newItem: e.target.value.trim()
+    newItem: e.target.value.trim(),
     })
 }
 
@@ -24,6 +25,7 @@ handleInputChange = (e) => {
  }
 
  addTodo = () => {
+
     const todos = [...this.state.todos]
 
     todos.push({
@@ -33,11 +35,14 @@ handleInputChange = (e) => {
     this.setState({ todos })
  }
 
-editTodo = (e, id) => {
-    let todos = this.state.todos.map(todo => {
-        if (todo.id === id)
-        todo.text = e.target.value;
-        return todo
+editTodo = (id) => {
+    const todos = this.state.todos
+    const selectedItem = todos.find(item => item.id === id)
+    console.log(selectedItem)
+    this.setState({
+    newItem: selectedItem.text,
+    editItem: true,
+    id: id
     })
 }
 
@@ -48,12 +53,14 @@ editTodo = (e, id) => {
                 todos={this.state.todos}
                 deleteTodo={this.deleteTodo}
                 editTodo={this.editTodo}
+
             />
             <input
                 onChange={this.handleInputChange}
+                value={this.state.newItem}
             />
+            <button onClick={this.addTodo}> { !this.state.editItem ? 'add item' : 'finish editing'} </button>
 
-            <button onClick={this.addTodo}> Add todo </button>
            </div>
         )
     }
