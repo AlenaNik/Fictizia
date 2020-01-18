@@ -1,73 +1,61 @@
 import React, {Component} from 'react';
-
+import Todos from './Todos'
 
 
 class App extends Component {
- constructor(props) {
-     super(props);
-
-     this.state = {
-         newItem: "",
-         list: [
-         ]
-     }
+ state = {
+     newItem: '',
+     todos: [
+         { id: 1, text: 'I\'m the first' },
+         { id: 2, text: 'I\'m the second' },
+     ],
+     editing: [],
  }
-    handleInputChange(key, value) {
-     this.setState({
-         [key]: value
-     })
-    }
 
-addItem() {
-     const newItem = {
-         id: 1 + Math.random(),
-         value: this.state.newItem.slice()
-     }
-     const list = [...this.state.list]
-     list.push(newItem)
+handleInputChange = (e) => {
     this.setState({
-        list,
-        newItem: ""
+    newItem: e.target.value.trim()
     })
-
 }
 
-    deleteItem(id) {
-     const list = [...this.state.list]
-     const updatedList = list.filter(item => item.id !== id);
-     this.setState({list: updatedList})
-    }
+ deleteTodo = (id) => {
+    const todos = [...this.state.todos]
+     const updatedTodos = todos.filter(item => id !== item.id )
+     this.setState({todos: updatedTodos})
+ }
 
+ addTodo = () => {
+    const todos = [...this.state.todos]
+
+    todos.push({
+        id: Math.random(),
+        text: this.state.newItem
+    })
+    this.setState({ todos })
+ }
+
+editTodo = (e, id) => {
+    let todos = this.state.todos.map(todo => {
+        if (todo.id === id)
+        todo.text = e.target.value;
+        return todo
+    })
+}
 
     render() {
         return (
-            <>
-                <h1>Add an item</h1>
-                <br />
-                <div>
-                    Add todo
-                    <input
-                    type="text"
-                    placeholder="Type something"
-                    value={this.state.newItem}
-                    onChange={e => this.handleInputChange("newItem", e.target.value)}
-                    />
-                    <button
-                    onClick={() => this.addItem()}
-                    >Add</button>
-                    <ul>
-                       {this.state.list.map(item => {
-                           return (
-                               <li key={item.id}>
-                                   {item.value}
-                                   <button onClick={() => this.deleteItem(item.id)}>Delete item</button>
-                               </li>
-                           )
-                       })}
-                    </ul>
+           <div>
+            <Todos
+                todos={this.state.todos}
+                deleteTodo={this.deleteTodo}
+                editTodo={this.editTodo}
+            />
+            <input
+                onChange={this.handleInputChange}
+            />
 
-                </div>
-            </>
+            <button onClick={this.addTodo}> Add todo </button>
+           </div>
         )
     }
 
