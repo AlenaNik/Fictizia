@@ -15,7 +15,8 @@ class App extends Component {
             { id: 3, 
             text: 'another'
             }
-        ]}
+        ]
+    }
 
     
     handleNameChange = e => {
@@ -40,8 +41,17 @@ class App extends Component {
             // tlter id = !id   
     }    
     editTodo = (todoToDelete) => {
-            console.log(todoToDelete)
+
+            
     }
+
+//  editTodo = (e, id) => {
+//     let todos = this.state.todos.map(todo => {
+//        if (todo.id === id) todo.text = e.taget.value;
+//        return todo
+//     })
+// }
+
 
 
     render() {
@@ -50,7 +60,7 @@ class App extends Component {
                 <div>
                     name: 
                     <input
-                    onChange={this.handleNameChange}
+                    inputchange={this.handleNameChange}
                     value={this.newInput}/>
                 </div>
                 <button onClick={this.addTodo}>Add to do</button>

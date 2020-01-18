@@ -1,5 +1,5 @@
 import React from 'react'
-
+import ListItem from './ListItem'
 
 const List = ( props ) => {
     
@@ -10,7 +10,6 @@ return (
                     <li>
                         {todo.text}
                         <button onClick={() => props.handledelete(todo)}>Delete todo</button>
-                        <button onClick={() => props.handleedit(todo)}>Edit todo</button>
                     </li>
                 )}
                 </ul>
