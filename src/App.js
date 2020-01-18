@@ -1,78 +1,72 @@
-import React, {Component} from 'react'
-import './App.css'
-import List from './List'
+
+import React, {Component} from 'react';
+import Todos from './Todos'
+import Input from './Input'
 
 class App extends Component {
-    state = {
-        newInput: '',
-        todos: [
-            { id: 1, 
-              text: 'call mom'
-            },
-            { id: 2, 
-                text: 'feed cat'
-            },
-            { id: 3, 
-            text: 'another'
-            }
-        ]
-    }
+ state = {
+     newItem: '',
+     editItem: false,
+     todos: [
+         { id: 1, text: 'I\'m the first' },
+         { id: 2, text: 'I\'m the second' },
+     ],
+ }
 
-    
-    handleNameChange = e => {
-        this.setState({ newInput: e.target.value.trim()})
-        console.log(this.newInput)
-    }
+handleInputChange = (e) => {
+    this.setState({
+    newItem: e.target.value.trim(),
+    })
+}
 
-    addTodo = () => {
-            let todos = [...this.state.todos]
-            todos.push({
-                id: Math.random(),
-                text: this.state.newInput})
-            this.setState({ todos })
-            console.log(todos)
-        }
+ deleteTodo = (id) => {
+    const todos = [...this.state.todos]
+     const updatedTodos = todos.filter(item => id !== item.id )
+     this.setState({todos: updatedTodos})
+ }
 
-    deleteTodo = (todoToDelete) => {
-            let todos = this.state.todos.filter(todo => todo.id !== todoToDelete.id) 
-             this.setState({ todos })
-             console.log(todos)
-            
-            // tlter id = !id   
-    }    
-    editTodo = (todoToDelete) => {
+ addTodo = () => {
 
-            
-    }
+    const todos = [...this.state.todos]
 
-//  editTodo = (e, id) => {
-//     let todos = this.state.todos.map(todo => {
-//        if (todo.id === id) todo.text = e.taget.value;
-//        return todo
-//     })
-// }
+    todos.push({
+        id: Math.random(),
+        text: this.state.newItem
+    })
+    this.setState({ todos,
+     newItem: ''
+     })
+ }
 
-
+editTodo = (id) => {
+    const todos = this.state.todos
+    const selectedItem = todos.find(item => item.id === id)
+    console.log(selectedItem)
+    this.setState({
+    newItem: selectedItem.text,
+    editItem: true,
+    id: id,
+    })
+}
 
     render() {
         return (
-            <>
-                <div>
-                    name: 
-                    <input
-                    inputchange={this.handleNameChange}
-                    value={this.newInput}/>
-                </div>
-                <button onClick={this.addTodo}>Add to do</button>
-                <List 
-                handledelete={this.deleteTodo}
-                handleedit={this.editTodo}
+           <div>
+            <Todos
                 todos={this.state.todos}
+                deleteTodo={this.deleteTodo}
+                editTodo={this.editTodo}
+
             />
-            </>
+            <Input
+                inputChange={this.handleInputChange}
+                value={this.state.newItem}
+            />
+            <button onClick={this.addTodo}> { !this.state.editItem ? 'add item' : 'finish editing'} </button>
+
+           </div>
         )
     }
-
 }
 
 export default App;

@@ -1,13 +1,11 @@
 import React from 'react'
 
-const ListItem = ({ todo, props }) => {
+
+const ListItem = ({key, children}) => {
     return (
-        <li>
-                        {todo.text}
-                        <button onClick={() => props.handledelete(todo)}>Delete todo</button>
-                        <button onClick={() => props.handleedit(todo)}>Edit todo</button>
-                    </li>
-                  
+        <div
+        key={key}
+        >{children}</div>
     )
 }
 
