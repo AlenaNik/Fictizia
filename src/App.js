@@ -84,6 +84,14 @@ const [error, setError] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("subbimited!", state)
+        for (let key in state) {
+            if(state[key] === '') {
+                setError(`Provide a valid ${key} or fill out`)
+                return
+            }
+        }
+        setError('')
+        console.log('succeeded!')
     }
 
     const handleInputChange = (e) => {
