@@ -82,7 +82,8 @@ const [state, setState] = useState(initialState)
 const [error, setError] = useState('')
 
     const handleSubmit = (e) => {
-
+        e.preventDefault();
+        console.log("subbimited!", state)
     }
 
     const handleInputChange = (e) => {
