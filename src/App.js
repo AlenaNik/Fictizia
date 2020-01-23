@@ -68,22 +68,51 @@ min-height: 100px;
 resize: none;
 ${SharedStyles}
 `
+
+
+const initialState =  {
+    name: '',
+    email: '',
+    message: '',
+    gender: ''
+}
+
 const App = () => {
+const [state, setState] = useState(initialState)
+const [error, setError] = useState('')
+
+    const handleSubmit = (e) => {
+
+    }
+
+    const handleInputChange = (e) => {
+        const inputName = e.target.name;
+        const value = e.target.value;
+        setState(prev => ({...prev, [inputName]: value}))
+    }
+
+
     return (
         <>
             <GlobalStyle/>
             <StyledFormWrapper>
-                <StyledForm>
+                <StyledForm onSubmit={handleSubmit}>
                     <h2>Contact Form</h2>
                     <label htmlFor="name">Name</label>
                     <StyledInput
+                    value={state.name}
                     type="text"
                     name="name"
+                    onChange={handleInputChange}
                     />
                     <label htmlFor="">Email</label>
                     <StyledInput
+                    value={state.email}
                     type="email"
                     name="email"
+                    onChange={handleInputChange}
+                    // check email with regex here?
+                    pattern=""
                     />
                     <StyledFieldSet>
                         <legend>
@@ -93,6 +122,8 @@ const App = () => {
                             <input type="radio"
                                 value="female"
                                 name="gender"
+                                checked={state.gender === 'female'}
+                                onChange={handleInputChange}
                             />
                             Female
                         </label>
@@ -100,18 +131,27 @@ const App = () => {
                             <input type="radio"
                                    value="male"
                                    name="gender"
+                                   checked={state.gender === 'male'}
+                                   onChange={handleInputChange}
                             />
                             Male
                         </label>
                     </StyledFieldSet>
-                    <label htmlFor="message">
+                    <label htmlFor="message"
+                    >
                         Message
                     </label>
-                    <StyledTextArea name="message">
+                    <StyledTextArea name="message"
+                                    value={state.message}
+                                    onChange={handleInputChange}
+                    >
                     </StyledTextArea>
-                    <StyledError>
-                        <p>Error Message Here</p>
-                    </StyledError>
+                    {error && (
+                        <StyledError>
+                            <p>{error}</p>
+                        </StyledError>
+                    )}
+
                     <StyledFormButton type="submit">Send Message</StyledFormButton>
                 </StyledForm>
 
