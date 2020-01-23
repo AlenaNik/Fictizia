@@ -91,6 +91,9 @@ const [error, setError] = useState('')
             }
         }
         setError('')
+
+        // regex here for email and stuff
+
         console.log('succeeded!')
     }
 
