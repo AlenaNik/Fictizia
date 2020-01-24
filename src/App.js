@@ -28,22 +28,29 @@ state = {
     age: '',
     surname: '',
     value: '',
-    isGoing: true,
-    isChecked: true
+    message: '',
+    checked: false,
+    gender: '',
+    error: '',
 }
 
 handleChange = (e) => {
-    const target = e.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
+    const name = e.target.name;
+    const value = e.target.value;
     this.setState({
-        [name]: value
+        [name]: value,
+        gender: e.target.value,
+        message: e.target.value,
+        checked: !this.state.checked,
     })
 }
+
+
 handleSubmit = (e) => {
-    alert('A form was submitted')
     e.preventDefault()
+    alert('A form was submitted')
 }
+
     render() {
         return (
             <>
@@ -73,7 +80,7 @@ handleSubmit = (e) => {
                     <br />
                     <label className="text-black text-sm font-bold mb-4">
                         Age:
-                    <input className="shadow appearance-none border rounded py-2 px-2 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    <input className="shadow appearance-none border rounded py-2 px-1 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="number"
                         name="age"
                         value={this.state.age}
@@ -87,8 +94,8 @@ handleSubmit = (e) => {
                         className="mb-4"
                         name="Games"
                         type="checkbox"
-                        checked={this.state.isGoing}
                         onChange={this.handleChange}
+                        defaultChecked={this.state.checked}
                     />
                     <br />
                     Football:
@@ -96,8 +103,8 @@ handleSubmit = (e) => {
                         className="mb-4"
                         name="Football"
                         type="checkbox"
-                        checked={this.state.isGoing}
                         onChange={this.handleChange}
+                        defaultChecked={this.state.checked}
                     />
                     <br />
                     Basketball:
@@ -105,8 +112,8 @@ handleSubmit = (e) => {
                         className="mb-4"
                         name="Basketball"
                         type="checkbox"
-                        checked={this.state.isGoing}
                         onChange={this.handleChange}
+                        defaultChecked={this.state.checked}
                     />
                     <br />
                     Art:
@@ -114,43 +121,62 @@ handleSubmit = (e) => {
                         className="mb-4"
                         name="Art"
                         type="checkbox"
-                        checked={this.state.isGoing}
                         onChange={this.handleChange}
+                        defaultChecked={this.state.checked}
                     />
                     <br />
 
                     <textarea
+                        name="textfield"
+                        value={this.state.message}
+                        onChange={this.handleChange}
                         className="bg-gray-200"
                         placeholder="description"
-                        value={this.state.value} onChange={this.handleChange} />
+                    />
                     <br />
 
 
                    <div className="radio">
+                       <legend>Gender</legend>
                     <label>
-                        <input type="radio" value="option1"
-                               checked={this.state.isChecked}
+                        <input type="radio"
+                               value="female"
+                               defaultChecked={true}
+                               checked={this.state.gender === 'female'}
                                onChange={this.handleChange}
                         />
-                        Option 1
+                        Female
                     </label>
                 </div>
                 <div className="radio">
                     <label>
-                        <input type="radio" value="option2"
-                               checked={!this.state.isChecked}
+                        <input type="radio"
+                               value="male"
+                               checked={this.state.gender === 'male'}
                                onChange={this.handleChange}
                         />
-                        Option 2
+                        Male
                     </label>
                 </div>
+                    <div className="radio">
+                        <label>
+                            <input type="radio"
+                                   value="neutral"
+                                   checked={this.state.gender === 'neutral'}
+                                   onChange={this.handleChange}
+
+                            />
+                            Gender-neutral
+                        </label>
+                    </div>
                 <div className="radio">
                     <label>
-                        <input type="radio" value="option3"
-                               checked={!this.state.isChecked}
+                        <input type="radio"
+                               value="notprovided"
+                               checked={this.state.gender === 'no-provided'}
                                onChange={this.handleChange}
                         />
-                        Option 3
+                        Prefer not to say
                     </label>
                 </div>
                 <br/>
@@ -170,11 +196,6 @@ handleSubmit = (e) => {
                         value="Submit"/>
 
                 </form>
-
-               {/*  <Select */}
-               {/*items={veggies}*/}
-               {/*onChange={(e) => console.log(e.target.value)}*/}
-               {/*/>*/}
             </>
         )
     }
