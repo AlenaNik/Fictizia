@@ -50,14 +50,6 @@ handleChange = (e) => {
 handleSubmit = (e) => {
     e.preventDefault()
     alert('A form was submitted')
-    console.log(
-        this.state.name,
-        this.state.age,
-        this.state.surname,
-        this.state.value,
-        this.state.message,
-        this.state.gender,
-        )
 }
 
 handleCountry = e => {
