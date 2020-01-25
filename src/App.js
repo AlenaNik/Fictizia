@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
 import './App.css'
 import Input from './Input'
+import Text from './Text'
 
 class App extends Component {
 state = {
-    color: '',
+    color: '#c9c9c9',
 }
 
 handleChange = (e) => {
@@ -16,21 +17,20 @@ handleChange = (e) => {
 
 
     render() {
+        const { color } = this.state
         return (
             <>
                 <form className="px-8 pt-6 pb-8 mb-4">
-                    <label className="text-black text-sm font-bold mb-4">
                     Color: 
-                    <p> I'm here {this.state.color}</p>
-                        <Input
-                        className="shadow appearance-none border rounded py-2 px-3 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        type="color"
-                        value="#ffffff"
-                        onChange={this.handleChange}
-                        />
-
-                    </label>
-
+                    <div>
+                    <Text color={color}>lo que sea</Text>
+                    <Input
+                    className="shadow appearance-none border rounded py-2 px-3 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="color"
+                    value={this.state.color}
+                    onChange={this.handleChange}
+                    />
+                       </div>
                 </form>
             </>
         )
