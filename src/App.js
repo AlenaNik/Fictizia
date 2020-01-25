@@ -26,11 +26,19 @@ state = {
     isValid: true
 }
 
+
+componentDidMount() {
+    let productsInCart = JSON.parse(localStorage.productsInCart || '[]');
+    let isValid = !!localStorage.isValid
+    this.setState({productsInCart, isValid})
+}
+
 addProduct = (product) => {
     const products = [...this.state.productsInCart, product];
     this.setState({
         productsInCart: products
     })
+    this.updateLocalstorage(products, "productsInCart")
 }
 
 handleRemove = (product) => {
@@ -38,6 +46,7 @@ handleRemove = (product) => {
     this.setState({
         productsInCart: productsToRemove
     })
+    this.updateLocalstorage(productsToRemove, "productsInCart")
 }
 
 calculateTotalPrice = () => {
@@ -53,10 +62,17 @@ handleInputChange = (e) => {
         coupon: e.target.value
     })
 }
-    verifyCoupon = () => {
+
+
+updateLocalstorage = (data, attr) => {
+        localStorage[attr] = JSON.stringify(data);
+    }
+
+verifyCoupon = () => {
     if (this.state.coupon === "SAVE10") {
         this.setState({
             isValid: true })
+        this.updateLocalstorage(true, "isValid");
     } else {
         alert("Something went wrong!")
     }
