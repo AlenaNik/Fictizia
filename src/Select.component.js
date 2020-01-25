@@ -12,7 +12,7 @@ const Select = (props) => {
                 >
                     {props.items.map((item, key) => (
                             <option
-                            key={item.key}
+                            key={item.id}
                             value={item.id || item.text}
                             >{item.text}</option>
 

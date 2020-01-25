@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import './App.css'
 import Select from './Select.component'
+import Textarea from './Textarea'
+import Input from './Input'
 
 const countries = [ {
     id: 1,
@@ -40,8 +42,6 @@ handleChange = (e) => {
     const value = e.target.value;
     this.setState({
         [name]: value,
-        gender: e.target.value,
-        message: e.target.value,
         checked: !this.state.checked,
     })
 }
@@ -50,10 +50,14 @@ handleChange = (e) => {
 handleSubmit = (e) => {
     e.preventDefault()
     alert('A form was submitted')
-}
-
-onEnterPress = (e) => {
-    // if(e.keyCode == 13 )
+    console.log(
+        this.state.name,
+        this.state.age,
+        this.state.surname,
+        this.state.value,
+        this.state.message,
+        this.state.gender,
+        )
 }
 
 handleCountry = e => {
@@ -65,19 +69,19 @@ handleCountry = e => {
             <>
                 <form onSubmit={this.handleSubmit} className="px-8 pt-6 pb-8 mb-4">
                     <label className="text-black text-sm font-bold mb-4">
-                        Name:
-                    <input
-                    className="shadow appearance-none border rounded py-2 px-3 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                    placeholder="Name"
-                    />
+                    Name:
+                        <Input
+                        className="shadow appearance-none border rounded py-2 px-3 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        name="name"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                        placeholder="Name"
+                        />
                     </label>
                     <label className="text-black text-sm font-bold mb-4">
-                        Surname:
-                        <input
+                    Surname:
+                        <Input
                             className="shadow appearance-none border rounded py-2 px-3 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text"
                             name="surname"
@@ -88,8 +92,8 @@ handleCountry = e => {
                     </label>
                     <br />
                     <label className="text-black text-sm font-bold mb-4">
-                        Age:
-                    <input className="shadow appearance-none border rounded py-2 px-1 m-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    Age:
+                    <Input className="shadow appearance-none border rounded py-2 px-1 m-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="number"
                         name="age"
                         value={this.state.age}
@@ -99,7 +103,7 @@ handleCountry = e => {
                     </label>
                     <br />
                     Games:
-                    <input
+                    <Input
                         className="mb-4"
                         name="Games"
                         type="checkbox"
@@ -108,7 +112,7 @@ handleCountry = e => {
                     />
                     <br />
                     Football:
-                    <input
+                    <Input
                         className="mb-4"
                         name="Football"
                         type="checkbox"
@@ -117,7 +121,7 @@ handleCountry = e => {
                     />
                     <br />
                     Basketball:
-                    <input
+                    <Input
                         className="mb-4"
                         name="Basketball"
                         type="checkbox"
@@ -126,7 +130,7 @@ handleCountry = e => {
                     />
                     <br />
                     Art:
-                    <input
+                    <Input
                         className="mb-4"
                         name="Art"
                         type="checkbox"
@@ -135,22 +139,21 @@ handleCountry = e => {
                     />
                     <br />
 
-                    <textarea
-                        name="textfield"
-                        value={this.state.message}
-                        onChange={this.handleChange}
-                        className="bg-gray-200"
-                        placeholder="description"
-                    />
+                   <Textarea 
+                   name="message"
+                   value={this.state.message}
+                   onChange={this.handleChange}
+                   placeholder="description"
+                   />
                     <br />
 
 
                    <div className="radio">
                        <legend>Gender</legend>
                     <label>
-                        <input type="radio"
+                        <Input type="radio"
+                               name="gender"
                                value="female"
-                               defaultChecked={true}
                                checked={this.state.gender === 'female'}
                                onChange={this.handleChange}
                         />
@@ -159,7 +162,8 @@ handleCountry = e => {
                 </div>
                 <div className="radio">
                     <label>
-                        <input type="radio"
+                        <Input type="radio"
+                               name="gender"
                                value="male"
                                checked={this.state.gender === 'male'}
                                onChange={this.handleChange}
@@ -169,7 +173,8 @@ handleCountry = e => {
                 </div>
                     <div className="radio">
                         <label>
-                            <input type="radio"
+                            <Input type="radio"
+                                   name="gender"
                                    value="neutral"
                                    checked={this.state.gender === 'neutral'}
                                    onChange={this.handleChange}
@@ -180,9 +185,10 @@ handleCountry = e => {
                     </div>
                 <div className="radio">
                     <label>
-                        <input type="radio"
-                               value="notprovided"
-                               checked={this.state.gender === 'no-provided'}
+                        <Input type="radio"
+                               name="gender"
+                               value="not-provided"
+                               checked={this.state.gender === 'not-provided'}
                                onChange={this.handleChange}
                         />
                         Prefer not to say
