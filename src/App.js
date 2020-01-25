@@ -32,6 +32,7 @@ state = {
     checked: false,
     gender: '',
     error: '',
+    countryId: 1
 }
 
 handleChange = (e) => {
@@ -49,6 +50,14 @@ handleChange = (e) => {
 handleSubmit = (e) => {
     e.preventDefault()
     alert('A form was submitted')
+}
+
+onEnterPress = (e) => {
+    // if(e.keyCode == 13 )
+}
+
+handleCountry = e => {
+    this.setState({ countryId: e.target.value })
 }
 
     render() {
@@ -80,7 +89,7 @@ handleSubmit = (e) => {
                     <br />
                     <label className="text-black text-sm font-bold mb-4">
                         Age:
-                    <input className="shadow appearance-none border rounded py-2 px-1 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    <input className="shadow appearance-none border rounded py-2 px-1 m-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="number"
                         name="age"
                         value={this.state.age}
@@ -183,10 +192,11 @@ handleSubmit = (e) => {
 
                     <Select
                         items={countries}
-                        onChange={(e) => console.log(e.target.value)}
+                        onChange={this.handleCountry}
                     />
                     <Select
                         items={province}
+                        value={this.state.countryId}
                         onChange={(e) => console.log(e.target.value)}
                     />
                     <br />
