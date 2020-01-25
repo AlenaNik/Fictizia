@@ -34,8 +34,11 @@ state = {
     checked: false,
     gender: '',
     error: '',
-    countryId: 1
+    countryId: 1,
+    
+    
 }
+nameRef = React.createRef();
 
 handleChange = (e) => {
     const name = e.target.name;
@@ -50,6 +53,7 @@ handleChange = (e) => {
 handleSubmit = (e) => {
     e.preventDefault()
     alert('A form was submitted')
+    console.log(this.nameRef.current.value)
 }
 
 handleCountry = e => {
@@ -61,6 +65,10 @@ handleCountry = e => {
             <>
                 <form onSubmit={this.handleSubmit} className="px-8 pt-6 pb-8 mb-4">
                     <label className="text-black text-sm font-bold mb-4">
+                        <input
+                        ref={this.nameRef}
+                        type="text"
+                        ></input>
                     Name:
                         <Input
                         className="shadow appearance-none border rounded py-2 px-3 m-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
