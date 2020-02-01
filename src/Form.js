@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react'; 
 
 const Form = () => {  
-const [input, setInput] = useState("")
+    const [ nombre, setNombre ] = useState('')
+    const [ showError, setShowError ] = useState(false)
 
-useEffect(() => {
-    return () => {
-        console.log('will unmount');
-    }
-  }, []);
+    useEffect(() => {
+        if (nombre == 'zamarro') {
+            setShowError(true) 
+        } else {
+        setShowError (false) 
+        }
+    }, [nombre])
 
-const replaceLetter = (e) => {
-    const inputthing = e.target.value
-    setInput(inputthing.replace('a', 'b'))
-}
-
-return (        
-    <form>            
-       <input
-          type="text"
-          value={input}
-          onChange={replaceLetter}
-        />
-    </form>   
-  );
+    return (        
+        <form>            
+        <input
+            type="text"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            />
+            { !showError && <span>error</span> } 
+        </form>   
+    );
 };
 export default Form;
