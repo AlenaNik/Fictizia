@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useApiCall } from './useApiCall';
 
 function Call () {
-  const [data, setData] = useState([])
 
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/todos')
-        .then(res => {
-            setData(res.data);
-        })
-        .catch(err => {
-           console.log(err)
-  
-        })
-}, []);
+  // componentDidMount 
+
+const data = useApiCall('https://jsonplaceholder.typicode.com/todos')
 
   return (
     <ul>
-      {data.map(post => (
+      {data && data.map(post => (
         <li key={post.id}>
             {post.title}
         </li>
@@ -25,4 +17,5 @@ function Call () {
     </ul>
   );
 }
+
 export default Call;
