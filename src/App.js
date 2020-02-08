@@ -3,6 +3,7 @@ import './App.css';
 import AppContext from './theme-context';
 import Header from './Header'
 import Text from './Text'
+import Button from './Button'
 
 function App() {
  
@@ -17,6 +18,7 @@ function App() {
           }}>
             <Header/>
             <Text/>
+            <Button/>
           </AppContext.Provider>
 
       </>
