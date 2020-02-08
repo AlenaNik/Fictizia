@@ -1,24 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import Form from './Form';
-import Call from './Call';
-
+import AppContext from './theme-context';
+import Header from './Header'
 
 function App() {
-    const  [show, setShow] = useState(true)
+ 
+  const [language, setLanguage] = useState('ru')
 
-const toggleComponent = () => {
-    setShow(!show)
-}
+
   return (
       <>
-    <div className="App"> 
-        <button onClick={toggleComponent}>Show</button>
-     {show && <Form />}
-    </div>
-    <Call/>
-     </>
+          <AppContext.Provider value={{
+            language: language,
+            changeLanguage: (language) => setLanguage(language)
+          }}>
+            <Header/>
+
+          </AppContext.Provider>
+
+      </>
   );
 }
 
 export default App;
+
