@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useApiCall } from './useApiCall';
+import Alert from './Alert'
 
 function Call () {
 
@@ -8,13 +9,13 @@ function Call () {
 const data = useApiCall('https://jsonplaceholder.typicode.com/todos')
 
   return (
-    <ul>
+    <Alert>
       {data && data.map(post => (
         <li key={post.id}>
             {post.title}
         </li>
       ))}
-    </ul>
+    </Alert>
   );
 }
 
