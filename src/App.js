@@ -1,23 +1,45 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './App.css';
-import Form from './Form';
-import Call from './Call';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import UserDetail from './UserDetail';
+import User from './Users';
+import Error from './Error';
 
 function App() {
-    const  [show, setShow] = useState(true)
-
-const toggleComponent = () => {
-    setShow(!show)
-}
+  
   return (
-      <>
-    <div className="App"> 
-        <button onClick={toggleComponent}>Show</button>
-     {show && <Form />}
+    <Router>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/user">Users</Link>
+          </li>
+          <li>
+            <Link to="/userdetails">User detail</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Switch>
+        <Route path="/userdetails">
+          <UserDetail />
+        </Route>
+        <Route path="/user">
+          <User />
+        </Route>
+        <Route path="*">
+          <Error />
+        </Route>
+      </Switch>
     </div>
-    <Call/>
-     </>
+  </Router>
+
   );
 }
 
