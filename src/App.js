@@ -1,21 +1,25 @@
 import React, {useState, useEffect} from 'react';
-import './App.css';
-import Alert from './Alert'
-import WrapperButton from './WrapperButton'
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Login from './InstagramProject/Login'
+import Posts from './InstagramProject/Posts'
 
 function App() {
   
   return (
-      <>
-    <div className="App"> 
-        <WrapperButton normal> ✨ Default </WrapperButton>
-        <WrapperButton success> ✨ Success </WrapperButton>
-        <WrapperButton warning> ✨ Warning </WrapperButton>
-        <WrapperButton> ✨ Error </WrapperButton>
-        <WrapperButton> ✨ Info </WrapperButton>
-    </div>
-     </>
+     <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Login/>
+          </Route>
+          <Route path='/posts'>
+            <Posts/>
+          </Route>
+        </Switch>
+     </Router>
   );
 }
 
